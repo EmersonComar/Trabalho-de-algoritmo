@@ -1,65 +1,18 @@
 agenda = []
-
 class Compromisso:
   def __init__(self, dia, mes, ano, horas, minutos, duracao, detalhes):
-    self.__dia = dia
-    self.__mes = mes
-    self.__ano = ano
-    self.__horas = horas
-    self.__minutos = minutos
-    self.__duracao = duracao
-    self.__detalhes = detalhes
-    self.__id = int(self.__exibir(ano) + self.__exibir(mes) + self.__exibir(dia) + self.__exibir(horas) + self.__exibir(minutos))
+    self.dia = dia
+    self.mes = mes
+    self.ano = ano
+    self.horas = horas
+    self.minutos = minutos
+    self.duracao = duracao
+    self.detalhes = detalhes
+    self.id = int(f"{ano}{mes}{dia}{horas}{minutos}")
     
-  @property
-  def id(self):
-    return self.__id
-  
-  @property
-  def dia(self):
-    return self.__dia
-
-  @property
-  def mes(self):
-    return self.__mes
-
-  @property
-  def ano(self):
-    return self.__ano
-
-  @property
-  def horas(self):
-    return self.__horas
-
-  @property
-  def minutos(self):
-    return self.__minutos
-
-  @property
-  def duracao(self):
-    return self.__duracao
-
-  @property
-  def detalhes(self):
-    return self.__detalhes
-
-  
-  def duracaoSet(self, valor):
-    self.__duracao = valor
-
-  def detalheSet(self, texto):
-    self.__detalhes = texto
-
-
-  def __exibir(self, valor):
-    if valor <= 9:
-      return "0" + str(valor)
-    else:
-      return str(valor)
-
   def __str__(self):
-    return f"""Data: {self.__exibir(self.dia)}/{self.__exibir(self.mes)}/{self.__exibir(self.ano)}
-Horário: {self.__exibir(self.horas)}:{self.__exibir(self.minutos)}
+    return f"""Data: {self.dia:02}/{self.mes:02}/{self.ano:04}
+Horário: {self.horas:02}:{self.minutos:02}
 duração: {self.duracao} hora(s)
 Detalhes: {self.detalhes}"""
 
@@ -150,7 +103,7 @@ def consulta_hora(lista):
 
   
 def consulta_data():
-  print("Data: ")
+  print("\tData do Compromisso")
   dia, mes, ano = entrada_data()
   lista = []
   for compromisso in agenda:
@@ -189,10 +142,10 @@ def consultar():
 # === incluir ===
 def incluir():
   print("\t=== Novo Compromisso ===")
-  print("Data:")
+  print("\tData do Compromisso")
   dia, mes, ano = entrada_data()
 
-  print("\nHorário do evento:")
+  print("\nHorário do evento")
   horas, minutos = entrada_horario()
 
   duracao = valida_entrada("Duração do evento (em horas): ", 0, 36, float)
@@ -258,16 +211,16 @@ def valida_data(dia, mes, ano):
   return True
 
 def entrada_horario():
-  horas = valida_entrada("\tHora: ", 0, 23)
-  minutos = valida_entrada("\tMinutos: ", 0, 59)
+  horas = valida_entrada("Hora: ", 0, 23)
+  minutos = valida_entrada("Minutos: ", 0, 59)
 
   return horas, minutos
 
 def entrada_data():
   while True:
-    dia = valida_entrada("\tDia: ", 1, 31)
-    mes = valida_entrada("\tMês: ", 1, 12)
-    ano = valida_entrada("\tAno: ", 2023, 2100)
+    dia = valida_entrada("Dia: ", 1, 31)
+    mes = valida_entrada("Mês: ", 1, 12)
+    ano = valida_entrada("Ano: ", 2023, 2100)
 
     if valida_data(dia, mes, ano):
       return dia, mes, ano
