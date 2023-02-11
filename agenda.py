@@ -38,12 +38,10 @@ def ordena(lista):
 def excluir():
 
   if len(agenda) == 0:
-    print("---------------------------------")
     print("\n=== Nenhum compromisso agendado ===\n")
   else:
     print("\t=== Excluir ===\n")
     lista = consulta_hora(consulta_data())
-    print("---------------------------------")
     if len(lista) == 0:
       print("\n=== Compromisso não encontrado ===\n")
     else:
@@ -62,7 +60,6 @@ def alterar():
     print("\t=== Alterar ===\n")
     compromisso = consulta_hora(consulta_data())
     if len(compromisso) == 0:
-      print("---------------------------------")
       print("\n=== Compromisso não encontrado ===")
     else:
 
@@ -70,13 +67,11 @@ def alterar():
       detalhes = input("Nova descrição: ")
       compromisso[0].duracaoSet(duracao)
       compromisso[0].detalheSet(detalhes)
-      print("---------------------------------")
       print("\n=== Compromisso alterado com sucesso ===\n")
 
 
 # === listar todos ===
 def listar():
-  print("---------------------------------")
   if len(agenda) != 0:
     print("\n\t=== Todos os Compromissos Agendados ===")
     listar_todos()
@@ -91,7 +86,9 @@ def listar_todos(lista=agenda):
 
 # === consultar ===
 def consulta_hora(lista):
-  print("Horário:")
+  if len(lista) == 0:
+    return []
+  print("\nHorário do Compromisso")
   horas, minutos = entrada_horario()
   lista_hora =[]
   for compromisso in lista:
@@ -103,7 +100,7 @@ def consulta_hora(lista):
 
   
 def consulta_data():
-  print("\tData do Compromisso")
+  print("Data do Compromisso")
   dia, mes, ano = entrada_data()
   lista = []
   for compromisso in agenda:
@@ -116,7 +113,6 @@ def consulta_data():
 def consultar():
   
   if len(agenda) == 0:
-    print("---------------------------------")
     print("\n=== Nenhum Compromisso agendado ===\n")
     return
   opt = valida_entrada("""
@@ -125,14 +121,12 @@ def consultar():
 2. Data e Hora
 --> """, 1, 2) 
 
-  print("---------------------------------")
   lista = []
   if opt == 1:
     lista = consulta_data()  
   else:
     lista = consulta_hora(consulta_data())
 
-  print("---------------------------------")
   if len(lista) != 0:
     print("\n\t=== Todos os Compromissos encontrados ===")
     listar_todos(lista)
@@ -142,10 +136,10 @@ def consultar():
 # === incluir ===
 def incluir():
   print("\t=== Novo Compromisso ===")
-  print("\tData do Compromisso")
+  print("Data do Compromisso")
   dia, mes, ano = entrada_data()
 
-  print("\nHorário do evento")
+  print("\nHorário do compromisso")
   horas, minutos = entrada_horario()
 
   duracao = valida_entrada("Duração do evento (em horas): ", 0, 36, float)
@@ -154,7 +148,6 @@ def incluir():
   registro = Compromisso(dia, mes, ano, horas, minutos, duracao, descricao)
   agenda.append(registro)
   
-  print("---------------------------------")
   print(f"""
 \n\t=== Compromisso Agendado ===
 
@@ -166,7 +159,6 @@ def incluir():
 def menu():
   while True:
     opt = valida_entrada("""
----------------------------------
 \n\t=== Agenda - Menu Inicial ===
 1. Incluir
 2. Consultar
@@ -175,7 +167,6 @@ def menu():
 5. Listar todos
 6. Sair
 -> """, 1, 6)
-    print("---------------------------------")
 
     if opt == 1:
       incluir()
