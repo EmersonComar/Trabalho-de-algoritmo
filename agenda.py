@@ -65,8 +65,8 @@ def alterar():
 
       duracao = float(input("Nova Duração: "))
       detalhes = input("Nova descrição: ")
-      compromisso[0].duracaoSet(duracao)
-      compromisso[0].detalheSet(detalhes)
+      compromisso[0].duracao = duracao
+      compromisso[0].detalhes = detalhes
       print("\n=== Compromisso alterado com sucesso ===\n")
 
 
