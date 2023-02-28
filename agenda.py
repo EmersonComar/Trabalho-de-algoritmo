@@ -17,6 +17,12 @@ duração: {self.duracao} hora(s)
 Detalhes: {self.detalhes}"""
 
 # === ordena ====
+
+"""
+A função "ordena" recebe como parâmetro uma lista de objetos e ordena a lista de forma 
+ascendente com base no atributo "id" de cada objeto. Para isso, a função utiliza o algoritmo de 
+ordenação conhecido como Bubble Sort.
+"""
 def ordena(lista):
   index = 0
   while index < (len(lista) - 1):
@@ -35,6 +41,14 @@ def ordena(lista):
     index += 1
 
 # === excluir ===
+"""
+A função "excluir" primeiro verifica se a agenda possui algum compromisso, caso
+não exista nenhum compromisso inserido, a função apenas printa uma mensagem avisando que não
+posui nenhum compromisso salvo.
+Caso a agenda contenha algum compromisso salvo, ela irá pesquisar através de duas funções
+a data e a hora do compromisso que se deseja excluir. Caso encontre um compromisso
+com exatamente a mesma data e a mesma hora, ele será excluido.
+"""
 def excluir():
 
   if len(agenda) == 0:
@@ -53,6 +67,15 @@ def excluir():
 
 
 # === alterar ===
+"""
+A função "alterar" primeiro verifica se a agenda possui algum compromisso, caso
+não exista nenhum compromisso inserido, a função apenas printa uma mensagem avisando que não
+posui nenhum compromisso salvo.
+Caso a agenda contenha algum compromisso salvo, ela irá pesquisar através de duas funções
+a data e a hora do compromisso que se deseja alterar. Caso encontre um compromisso
+com exatamente a mesma data e a mesma hora, será pedido uma nova duração e novos detalhes
+para serem alterados no compromisso.
+"""
 def alterar():
   if len(agenda) == 0:
     print("\n=== Nenhum Compromisso agendado ===\n")
@@ -71,6 +94,11 @@ def alterar():
 
 
 # === listar todos ===
+"""
+A função "listar" irá validar se existe algum compromisso salvo na agenda; caso tenha, a
+função "listar_todos" irá ser executada; caso não tenha, apenas será mostrado
+uma mensagem avisando que não possui compromissos salvos.
+"""
 def listar():
   if len(agenda) != 0:
     print("\n\t=== Todos os Compromissos Agendados ===")
@@ -78,6 +106,12 @@ def listar():
   else:
     print("\n=== Nenhum Compromisso agendado ===\n")
 
+"""
+A função "lista_todos" irá listar a agenda como parâmetro default.
+Será atraés de um for em que cada um dos compromissos da lista serão apresentados.
+O print(compromisso) utiliza o método especial __str__ do python para apresentar
+cada um dos compromissos de forma na qual foi ajustado na classe Compromisso
+"""
 def listar_todos(lista=agenda):
   for compromisso in lista:
     print("\n")
@@ -85,6 +119,13 @@ def listar_todos(lista=agenda):
 
 
 # === consultar ===
+"""
+A função "consulta_hora" recebe uma lista como parâmetros que irá conter alguma data em
+específico e, se caso a lista da data estiver vazio, a função irá retornar uma lista vazia
+para quem chamá-la. Caso a lista da data não esteja vazia, será pesquisado através dela se 
+existe algum compromisso com a hora e o minuto informado e será retornado para quem esse
+vetor para quem a chamou.
+"""
 def consulta_hora(lista):
   if len(lista) == 0:
     return []
@@ -98,7 +139,12 @@ def consulta_hora(lista):
   return lista_hora
 
 
-  
+"""
+A função "consulta_data" primeiro irá requisitar um dia, mês e ano e, após informados,
+será pesquisado se existe algum compromisso que contenha essa data na agenda.
+Se existir algum compromisso com a determinada data, esse será adicionado em um vetor
+que será retornado quem a chamou
+"""  
 def consulta_data():
   print("Data do Compromisso")
   dia, mes, ano = entrada_data()
@@ -109,7 +155,11 @@ def consulta_data():
 
   return lista
 
+"""
+A função "consultar" irá apresentar um menu onde será possível escolher se deseja pesquisar
+por data ou por data e horas.
 
+"""
 def consultar():
   
   if len(agenda) == 0:
