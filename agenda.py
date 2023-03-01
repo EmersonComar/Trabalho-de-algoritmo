@@ -1,4 +1,12 @@
 agenda = []
+
+"""
+"Compromisso" é uma classe que representa um compromisso agendado. Ele tem vários atributos, 
+incluindo data (dia, mês e ano), horário (horas e minutos), duração (em horas), detalhes (uma 
+descrição do compromisso) e um ID exclusivo gerado a partir da data e do horário. O método __str__ 
+retorna uma string formatada que contém todas essas informações para exibir um compromisso de forma 
+legível.
+"""
 class Compromisso:
   def __init__(self, dia, mes, ano, horas, minutos, duracao, detalhes):
     self.dia = dia
@@ -143,7 +151,7 @@ def consulta_hora(lista):
 A função "consulta_data" primeiro irá requisitar um dia, mês e ano e, após informados,
 será pesquisado se existe algum compromisso que contenha essa data na agenda.
 Se existir algum compromisso com a determinada data, esse será adicionado em um vetor
-que será retornado quem a chamou
+que será retornado a quem chamou.
 """  
 def consulta_data():
   print("Data do Compromisso")
@@ -156,9 +164,12 @@ def consulta_data():
   return lista
 
 """
-A função "consultar" irá apresentar um menu onde será possível escolher se deseja pesquisar
-por data ou por data e horas.
-
+A função "consultar" primeiro irá validar se na agenda existe algum compromisso salvo e, 
+caso tenha, apresentar um menu onde será possível escolher se deseja pesquisar por data 
+ou por data e horas.
+Caso o usuário escolher pesquisar apenas por data, a função "consuta_data" será acionada,
+caso escolha pesquisar por data e hora, o retorno da função "consulta_data" será o 
+parãmetro da função "consulta_hora". 
 """
 def consultar():
   
@@ -184,6 +195,11 @@ def consultar():
     print("\n=== Nenhum compromisso encontrado ===\n")
 
 # === incluir ===
+
+"""
+A função "incluir" é responsável por obter as informações necessárias para criar um novo compromisso 
+e adicioná-lo à lista agenda.
+"""
 def incluir():
   print("\t=== Novo Compromisso ===")
   print("Data do Compromisso")
@@ -205,7 +221,16 @@ def incluir():
 
 
 # === menu ===
-
+"""
+A função "menu" é responsável por exibir um menu para o usuário com várias opções 
+relacionadas a uma agenda.
+A função utiliza a função "valida_entrada" para obter a escolha do usuário. Se o usuário 
+digitar um número válido (entre 1 e 6), a função verifica qual opção foi escolhida e 
+chama a função correspondente (incluir, consultar, alterar, excluir, listar) ou sai do 
+loop e exibe a mensagem "Bye".
+A função "ordena" é chamada após cada operação de inserção, alteração ou exclusão na
+agenda.  
+"""
 def menu():
   while True:
     opt = valida_entrada("""
@@ -234,6 +259,12 @@ def menu():
   print("Bye")
 
 # === Ferramentas ===
+
+"""
+A função "valida_data" tem como objetivo verificar se uma data é válida, considerando o 
+número de dias de cada mês e se o ano é bissexto ou não. A função retorna True se a data 
+for válida e False se a data for inválida.
+"""
 def valida_data(dia, mes, ano):
   if mes == 4 or mes == 6 or mes == 9 or mes == 11:
     if dia <= 30:
@@ -251,12 +282,24 @@ def valida_data(dia, mes, ano):
       
   return True
 
+
+"""
+A função "entrada_horario" tem como objetivo obter do usuário uma entrada de horário 
+válida, utilizando a função "valida_entrada" para validar cada campo do horário. A função 
+retorna uma tupla contendo os valores de hora e minutos válidos.
+"""
 def entrada_horario():
   horas = valida_entrada("Hora: ", 0, 23)
   minutos = valida_entrada("Minutos: ", 0, 59)
 
   return horas, minutos
-
+  
+"""
+A função "entrada_data" tem como objetivo obter do usuário uma entrada de data válida, 
+utilizando a "função valida_entrada" para validar cada campo da data e a função 
+"valida_data" para verificar se a data é válida. A função mantém a execução em loop até 
+que uma data válida seja fornecida pelo usuário.
+"""
 def entrada_data():
   while True:
     dia = valida_entrada("Dia: ", 1, 31)
@@ -268,6 +311,16 @@ def entrada_data():
     else:
       print("Data inválida. Tente novamente")
 
+
+"""
+A função "valida_entrada" tem como objetivo validar a entrada de dados do usuário.
+A função utiliza um loop while para manter a execução até que uma entrada válida seja 
+fornecida pelo usuário. Dentro do loop, a função utiliza a função input para receber a 
+entrada do usuário e, em seguida, tenta converter essa entrada para o tipo de dado 
+especificado pelo parâmetro tipo usando a função tipo. Se a conversão for bem-sucedida e 
+o valor estiver dentro do intervalo definido pelos parâmetros minimo e maximo, a função 
+retorna o valor.
+"""
 def valida_entrada(mensagem, minimo, maximo, tipo=int):
   while True:
     try:
